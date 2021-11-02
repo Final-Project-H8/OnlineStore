@@ -22,8 +22,10 @@ const ProductListing = () => {
   }, []);
 
   return (
-    <div>
-      <ProductComponent />
+    <div class="container">
+      <div className="row g-4">
+        <ProductComponent />
+      </div>
     </div>
   );
 };
