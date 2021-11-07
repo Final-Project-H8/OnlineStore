@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 
 const Login = () => {
@@ -8,18 +8,6 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const history = useHistory();
-
-  // const [emailLogin, setEmailLogin] = useState("");
-  // const [passLogin, setPassLogin] = useState("");
-
-  // useEffect(() => {
-  //   fetch("https://fakestoreapi.com/users/5")
-  //     .then((res) => res.json())
-  //     .then((json) => {
-  //       setEmailLogin(json.email);
-  //       setPassLogin(json.password);
-  //     });
-  // }, []);
 
   const handleEmailChange = (e) => {
     setEmailError("");
@@ -58,20 +46,24 @@ const Login = () => {
     }
   };
 
-  const login = (email, password) => {
-    if (email == "derek@gmail.com" && password == "jklg*_56") {
-      return true;
-    } else {
-      return false;
-    }
+  async function login (email, password) {
+    let response = await fetch("https://fakestoreapi.com/users");
+    
+    let data = await response.json();
+    
+    let cek = await data.find(item => {
+      return (item.email === email && item.password === password)
+    });
+
+    return (cek) ? true : false;
   };
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async(e) => {
     e.preventDefault();
     emailCheck(email);
     passwordCheck(password);
 
-    if (login(email, password)) {
+    if (await login(email, password)) {
       localStorage.setItem("login", "true");
       history.push("/");
       window.location.reload(false);
@@ -81,36 +73,6 @@ const Login = () => {
       }
     }
   };
-
-  // const login = (e) => {
-  //   e.preventDefault();
-  //   console.log(email, password);
-  //   localStorage.setItem("login", "true");
-  //   history.push("/");
-  // };
-  // useEffect(() => {
-  //   if (localStorage.getItem("user-info")) {
-  //     history.push("/loginResult");
-  //   }
-  // }, []);
-
-  // async function login() {
-  //   console.log(email, password);
-  //   let item = { email, password };
-  //   fetch("https://fakestoreapi.com/users/1", {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       Accept: "application/json",
-  //     },
-  //     body: JSON.stringify(item),
-  //   })
-  //     .then((res) => res.json())
-  //     .then((json) => console.log(json));
-
-  //   localStorage.setItem("user-info", JSON.stringify);
-  //   history.push("/loginResult");
-  // }
 
   return (
     <>
@@ -123,10 +85,7 @@ const Login = () => {
             Email address
           </label>
           <input
-            // type="email"
             className="form-control"
-            // id="exampleInputEmail1"
-            // aria-describedby="emailHelp"
             onChange={handleEmailChange}
             value={email}
           />
