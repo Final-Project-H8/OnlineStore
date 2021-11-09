@@ -3,10 +3,11 @@ import ProductListing from "./ProductListing";
 
 const Home = () => {
   return (
-    <>
-      <h1>Products</h1>
-      <ProductListing />
-    </>
+    <div className="px-5">
+      <div className="row row-eq-height">
+        <ProductListing />
+      </div>
+    </div>
   );
 };
 
