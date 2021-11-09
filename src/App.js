@@ -10,39 +10,37 @@ import Footer from "./components/Footer";
 
 function App() {
   return (
-    <>
-      <BrowserRouter>
-          <Switch>
-            <Route exact path="/">
-              <Header />
-              <Home />
-              <Footer />
-            </Route>
-            <Route path="/cart">
-              <Header />
-              <Cart />
-              <Footer />
-            </Route>
-            <Route path="/login">
-              <Header />
-              <Login />
-            </Route>
-            <Route path="/product/:productId">
-              <Header />
-              <ProductDetail />
-              <Footer />
-            </Route>
-            <Route path="/loginResult">
-              <Header />
-              <LoginResult />
-              <Footer />
-            </Route>
-            <Route path="/admin">
-              <Admin />
-            </Route>
-          </Switch>
-      </BrowserRouter>
-    </>
+    <BrowserRouter>
+        <Switch>
+          <Route exact path="/">
+            <Header />
+            <Home />
+            <Footer />
+          </Route>
+          <Route path="/cart">
+            <Header />
+            <Cart />
+            <Footer />
+          </Route>
+          <Route path="/login">
+            <Header />
+            <Login />
+          </Route>
+          <Route path="/product/:productId">
+            <Header />
+            <ProductDetail />
+            <Footer />
+          </Route>
+          <Route path="/loginResult">
+            <Header />
+            <LoginResult />
+            <Footer />
+          </Route>
+          <Route path="/admin">
+            <Admin />
+          </Route>
+        </Switch>
+    </BrowserRouter>
   );
 }
 
