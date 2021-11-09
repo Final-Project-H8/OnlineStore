@@ -78,16 +78,6 @@ const Login = () => {
     }
   };
 
-  // if (await login(email, password)) {
-  //   localStorage.setItem("login", "true");
-  //   history.push("/");
-  //   window.location.reload(false);
-  // } else {
-  //   if (emailCheck(email) && passwordCheck(password)) {
-  //     alert("Email / Password Salah!");
-  //   }
-  // }
-
   return (
     <div className="p-5">
       <div className="mb-5">

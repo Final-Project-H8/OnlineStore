@@ -10,15 +10,6 @@ const Header = () => {
     window.location.reload(false);
   };
 
-  // const checkLogin = () => {
-  //   console.log(localStorage.getItem("login"));
-  //   if (localStorage.getItem("login") === null) {
-  //     return false;
-  //   } else {
-  //     return true;
-  //   }
-  // };
-
   return (
     <nav class="navbar navbar-expand-lg navbar-light bg-light py-2 px-4 justify-content-between">
       <a class="navbar-brand" href="/">Bukapedia</a>
