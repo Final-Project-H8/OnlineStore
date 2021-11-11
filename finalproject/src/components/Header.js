@@ -12,7 +12,9 @@ const Header = () => {
 
   return (
     <nav class="navbar navbar-expand-lg navbar-light bg-light py-2 px-4 justify-content-between">
-      <a class="navbar-brand" href="/">Bukapedia</a>
+      <a class="navbar-brand" href="/">
+        Bukapedia
+      </a>
       <div>
         <ul class="navbar-nav">
           <li class="nav-item active">
@@ -20,30 +22,30 @@ const Header = () => {
               Home
             </Link>
           </li>
-          {localStorage.getItem("login") === "true" ? 
-          <>
-            <li className="nav-item">
-              <Link to="/cart" className="nav-link link-dark px-2">
-                Cart
-              </Link>
-            </li>
-            <li className="nav-item">
-              <button
-                to="/logout"
-                className="btn btn-danger"
-                onClick={logout}
+          {localStorage.getItem("login") === "true" ? (
+            <>
+              <li className="nav-item">
+                <Link to="/cart" className="nav-link link-dark px-2">
+                  Cart
+                </Link>
+              </li>
+              <li className="nav-item">
+                <button
+                  to="/logout"
+                  className="btn btn-danger"
+                  onClick={logout}
                 >
-                Logout
-              </button>
-            </li>
-          </>
-          : 
+                  Logout
+                </button>
+              </li>
+            </>
+          ) : (
             <li className="nav-item">
               <Link to="/login" className="nav-link link-dark px-2">
                 Login
               </Link>
             </li>
-           }
+          )}
         </ul>
       </div>
     </nav>

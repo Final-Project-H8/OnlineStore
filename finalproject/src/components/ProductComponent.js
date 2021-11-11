@@ -9,20 +9,12 @@ const ProductComponent = () => {
   var stocks = JSON.parse(localStorage.stocks);
 
   const renderList = products.map((product) => {
-    // console.log(products);
     const { id, title, image, price, category, description } = product;
 
     const addToCart = () => {
       if (localStorage.getItem("login") === "false") {
         history.push("/login");
       } else {
-<<<<<<< Updated upstream
-        // history.push("/cart");
-        // console.log(id);
-        stocks[id - 1].stocks = stocks[id - 1].stocks - 1;
-        localStorage.stocks = JSON.stringify(stocks);
-        // console.log(JSON.parse(localStorage.stocks));
-=======
         // stocks[id - 1].stocks = stocks[id - 1].stocks - 1;
         // localStorage.stocks = JSON.stringify(stocks);
 
@@ -52,7 +44,6 @@ const ProductComponent = () => {
         }
 
         // history.push("/cart");
->>>>>>> Stashed changes
       }
     };
 
@@ -69,24 +60,12 @@ const ProductComponent = () => {
             />
             <p className="mt-2 text-white text-center">{category}</p>
           </div>
-<<<<<<< Updated upstream
-          <div className="text-center">
-            <p class="card-text mb-auto">
-              {JSON.parse(localStorage.stocks)[id - 1].stocks}
-            </p>
-            <Link to={`/product/${id}`} className="btn btn-primary m-2">
-              Detail
-            </Link>
-            <button className="btn btn-success" onClick={addToCart}>
-              Add to Cart
-            </button>
-=======
           <div className="col-8 bg-light">
             <h3>{title}</h3>
             <p>{description}</p>
             <br />
             <h3>$ {price}</h3>
-            <h4>{stocks[id - 1].stocks}</h4>
+            <h4>Stock : {stocks[id - 1].stocks}</h4>
             <div className="mt-5 btn-group">
               <Link to={`/product/${id}`}>
                 <button className="btn btn-primary btn-lg rounded m-2">
@@ -100,7 +79,6 @@ const ProductComponent = () => {
                 Add To Cart
               </button>
             </div>
->>>>>>> Stashed changes
           </div>
         </div>
       </div>

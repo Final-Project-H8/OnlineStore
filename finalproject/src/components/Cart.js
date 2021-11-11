@@ -1,42 +1,17 @@
-import { Redirect } from "react-router";
+import { Redirect, useHistory } from "react-router";
 
 const Cart = () => {
+  const history = useHistory();
   if (!localStorage.getItem("login")) {
     return <Redirect to="/login" />;
   }
 
-<<<<<<< Updated upstream
-=======
   var totalPrice = 0;
->>>>>>> Stashed changes
   var currentCart;
   if (localStorage.cart === undefined) {
     currentCart = [];
   } else {
     currentCart = JSON.parse(localStorage.cart);
-<<<<<<< Updated upstream
-    console.log(currentCart);
-  }
-
-  const renderList = currentCart.map((cart) => {
-    const { id, product, size, qty } = cart;
-
-    return (
-      <div className="p-5 mb-4 bg-light rounded-3 border">
-        <div className="container-fluid py-5">
-          <div className="row">
-            <div className="col">
-              <img
-                className="img-thumbnail"
-                src={product.image}
-                alt={product.title}
-              />
-              <h2>{product.title}</h2>
-              <h2>{size}</h2>
-              <h2>{product.price}</h2>
-              <h2>{qty}</h2>
-              <h2>Total: {qty * product.price}</h2>
-=======
     // console.log(currentCart);
   }
 
@@ -47,6 +22,13 @@ const Cart = () => {
     const changeTotal = (e) => {
       document.getElementById(id).innerHTML =
         "$" + e.target.value * product.price;
+      let itemCheck = currentCart.findIndex((x) => x.id === id);
+      let currentStock = JSON.parse(localStorage.cart);
+      currentStock[itemCheck].qty = +e.target.value;
+      localStorage.cart = JSON.stringify(currentStock);
+      totalPrice = 0;
+      updateTotal();
+      // console.log(currentStock[itemCheck]);
       // console.log(e.target.value);
     };
 
@@ -69,6 +51,7 @@ const Cart = () => {
                   <td align="left" width="100px">
                     $ {product.price}
                   </td>
+
                   <td>
                     <input
                       onChange={(e) => changeTotal(e)}
@@ -79,7 +62,6 @@ const Cart = () => {
                   <td id={id}>$ {qty * product.price}</td>
                 </tr>
               </table>
->>>>>>> Stashed changes
             </div>
           </div>
         </div>
@@ -87,23 +69,13 @@ const Cart = () => {
     );
   });
 
-<<<<<<< Updated upstream
-  const empty = () => {
-    return (
-      <div className="p-5 mb-4 bg-light rounded-3 border">
-        <div className="container-fluid py-5">
-          <div className="row">
-            <div className="col">
-              <h2>Anda Belum Memilih Item</h2>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
+  const updateTotal = () => {
+    JSON.parse(localStorage.cart).map((cart) => {
+      const { id, product, qty } = cart;
+      totalPrice = totalPrice + qty * product.price;
+    });
   };
 
-  return <>{currentCart == [] ? empty : renderList}</>;
-=======
   return (
     <>
       {[
@@ -112,6 +84,7 @@ const Cart = () => {
           <tr>
             <th width="800px"></th>
             <th>Price</th>
+
             <th>Quantity</th>
             <th>Total</th>
           </tr>
@@ -125,22 +98,52 @@ const Cart = () => {
         </table>,
         <button
           className="btn btn-success text-white btn-lg rounded m-2"
-          // onClick={() => {
-          //   let stocks = JSON.parse(localStorage.stocks);
-          //   currentCart.map((cart) => {
-          //     const { id, product, qty } = cart;
-          //     stocks[id - 1] = stocks[id - 1] - qty;
-          //   });
-          //   localStorage.stocks = JSON.stringify(stocks);
-          //   localStorage.removeItem("cart");
-          // }}
+          onClick={() => {
+            let stocks = JSON.parse(localStorage.stocks);
+            JSON.parse(localStorage.cart).map((cart) => {
+              const { id, product, qty } = cart;
+              if (stocks[id - 1].stocks < qty) {
+                stocks[id - 1].stocks = 0;
+              } else {
+                stocks[id - 1].stocks = stocks[id - 1].stocks - qty;
+              }
+              if (localStorage.rekap === undefined) {
+                localStorage.rekap = JSON.stringify([
+                  {
+                    id: id,
+                    product: product,
+                    qty: qty,
+                  },
+                ]);
+              } else {
+                let currentRekap = JSON.parse(localStorage.rekap);
+                let itemCheck = currentRekap.findIndex((x) => x.id === id);
+                if (itemCheck === -1) {
+                  currentRekap.push({
+                    id: id,
+                    product: product,
+                    qty: qty,
+                  });
+
+                  localStorage.rekap = JSON.stringify(currentRekap);
+                } else {
+                  currentRekap[itemCheck].qty =
+                    currentRekap[itemCheck].qty + qty;
+                  localStorage.rekap = JSON.stringify(currentRekap);
+                }
+              }
+            });
+            localStorage.stocks = JSON.stringify(stocks);
+
+            localStorage.removeItem("cart");
+            history.push("/");
+          }}
         >
           Checkout
         </button>,
       ]}
     </>
   );
->>>>>>> Stashed changes
 };
 
 export default Cart;
