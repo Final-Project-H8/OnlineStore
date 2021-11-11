@@ -25,9 +25,12 @@ const ProductListing = () => {
       localStorage.stock = "true";
       localStorage.stocks = JSON.stringify(stocks);
     }
+<<<<<<< Updated upstream
     // console.log(JSON.parse(localStorage.stocks));
 
     // console.log(response.data[0]);
+=======
+>>>>>>> Stashed changes
     dispatch(setProducts(response.data));
   };
 

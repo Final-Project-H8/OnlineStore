@@ -62,20 +62,24 @@ const Login = () => {
     e.preventDefault();
     emailCheck(email);
     passwordCheck(password);
-
-    if (await login(email, password)) {
+    if(email === "admin@bukapedia.com" && password === "admin123"){
+      localStorage.setItem("login", "true");
+      history.push("/admin");
+      window.location.reload(false);
+    } else if (email === "derek@gmail.com" && password === "jklg*_56") {
       localStorage.setItem("login", "true");
       history.push("/");
       window.location.reload(false);
     } else {
-      if (emailCheck(email) && passwordCheck(password)) {
-        alert("Email / Password Salah!");
+      if(emailCheck(email) && passwordCheck(password))
+      {
+        alert("Email / Password Salah !");
       }
     }
   };
 
   return (
-    <>
+    <div className="p-5">
       <div className="mb-5">
         <h1>Login</h1>
       </div>
@@ -108,7 +112,7 @@ const Login = () => {
         </div>
         <button className="btn btn-primary">Submit</button>
       </form>
-    </>
+    </div>
   );
 };
 
