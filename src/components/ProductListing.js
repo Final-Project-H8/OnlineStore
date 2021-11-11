@@ -14,6 +14,17 @@ const ProductListing = () => {
       .catch((err) => {
         console.log("Err", err);
       });
+    let stocks = [];
+    if (localStorage.stock === undefined) {
+      for (let i = 0; i < 20; i++) {
+        stocks[i] = {
+          id: response.data[i].id,
+          stocks: 20,
+        };
+      }
+      localStorage.stock = "true";
+      localStorage.stocks = JSON.stringify(stocks);
+    }
     dispatch(setProducts(response.data));
   };
 
@@ -22,7 +33,7 @@ const ProductListing = () => {
   }, []);
 
   return (
-    <div class="container">
+    <div className="container">
       <div className="row g-4">
         <ProductComponent />
       </div>
